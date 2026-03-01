@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Modelo Diedrico AR con Marcador</title>
+  <title>AR con Marcador - Modelo Diedrico</title>
 
   <!-- A-Frame -->
   <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
@@ -33,7 +33,6 @@
       text-align: center;
     }
 
-    /* A-Frame ocupa toda la pantalla disponible */
     a-scene {
       width: 90%;
       max-width: 800px;
@@ -51,13 +50,14 @@
   <p>Escanea el QR para abrir esta página y coloca tu folio con el marcador frente a la cámara.</p>
 
   <a-scene embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
-
-    <!-- Marcador Hiro (puedes reemplazarlo por un marcador personalizado) -->
+    
+    <!-- Marcador clásico Hiro (puedes reemplazarlo por uno personalizado) -->
     <a-marker preset="hiro">
       <a-entity 
         gltf-model="diedrico2.glb"
         scale="0.5 0.5 0.5"
-        rotation="0 0 0">
+        rotation="0 0 0"
+        position="0 0 0">
       </a-entity>
     </a-marker>
 
