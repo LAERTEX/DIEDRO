@@ -42,6 +42,20 @@
       background-color: #ffffff;
       margin-bottom: 20px;
     }
+
+    #overlay {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 14px;
+      text-align: center;
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
@@ -49,10 +63,12 @@
   <h1>Modelo Diedrico AR con Marcador</h1>
   <p>Escanea el QR para abrir esta página y coloca tu folio con el marcador frente a la cámara.</p>
 
+  <div id="overlay">Apunta la cámara al folio para ver el modelo</div>
+
   <a-scene embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
-    
-    <!-- Marcador clásico Hiro (puedes reemplazarlo por uno personalizado) -->
-    <a-marker preset="hiro">
+
+    <!-- Marcador clásico Hiro -->
+    <a-marker preset="hiro" id="marker">
       <a-entity 
         gltf-model="diedrico2.glb"
         scale="0.5 0.5 0.5"
@@ -63,6 +79,20 @@
 
     <a-entity camera></a-entity>
   </a-scene>
+
+  <script>
+    // Ocultar overlay cuando el marcador es detectado
+    const marker = document.querySelector('#marker');
+    const overlay = document.querySelector('#overlay');
+
+    marker.addEventListener('markerFound', () => {
+      overlay.style.display = 'none';
+    });
+
+    marker.addEventListener('markerLost', () => {
+      overlay.style.display = 'block';
+    });
+  </script>
 
 </body>
 </html>
