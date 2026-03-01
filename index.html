@@ -1,61 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Modelo Diedrico AR</title>
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Modelo Diedrico AR con Marcador</title>
 
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5; /* Fondo agradable */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-  }
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+  <!-- AR.js -->
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.js"></script>
 
-  h1 {
-    margin-top: 20px;
-    color: #333;
-    text-align: center;
-  }
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
 
-  model-viewer {
-    width: 90%;
-    max-width: 800px;
-    height: 600px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* sombra elegante */
-    background-color: #fff; /* Fondo del visor */
-  }
+    h1 {
+      margin-top: 20px;
+      color: #333;
+      text-align: center;
+    }
 
-  p {
-    margin-top: 15px;
-    color: #555;
-    text-align: center;
-  }
-</style>
+    p {
+      margin-top: 10px;
+      color: #555;
+      text-align: center;
+    }
 
+    /* A-Frame ocupa toda la pantalla disponible */
+    a-scene {
+      width: 90%;
+      max-width: 800px;
+      height: 600px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      background-color: #ffffff;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Visualiza el modelo Diedrico en 3D y AR</h1>
+  <h1>Modelo Diedrico AR con Marcador</h1>
+  <p>Escanea el QR para abrir esta página y coloca tu folio con el marcador frente a la cámara.</p>
 
-<model-viewer
-  src="diedrico2.glb"
-  ar
-  ar-modes="webxr scene-viewer quick-look"
-  camera-controls
-  auto-rotate
-  shadow-intensity="1"
-  exposure="1"
-  style="background-color: #ffffff;">
-</model-viewer>
+  <a-scene embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
-<p>Escanea el QR o abre esta página en tu móvil para ver el modelo en realidad aumentada.</p>
+    <!-- Marcador Hiro (puedes reemplazarlo por un marcador personalizado) -->
+    <a-marker preset="hiro">
+      <a-entity 
+        gltf-model="diedrico2.glb"
+        scale="0.5 0.5 0.5"
+        rotation="0 0 0">
+      </a-entity>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
 
 </body>
 </html>
